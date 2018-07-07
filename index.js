@@ -8,8 +8,9 @@ const router = express.Router();
 const authentication = require('./routes/authentication')(router);
 
 // 5) body parser
-
 const bodyParser = require('body-parser');
+
+const cors = require('cors'); // CORS is a node.js package for providing a Connect/Express middleware that can be used to enable CORS with various options.
 
 // 2) Mongodb connection
 var mongoose = require('mongoose');
@@ -22,6 +23,7 @@ mongoose.connect(config.uri, (err) => {
     }
 });
 
+app.use(cors({ origin: 'http://localhost:4200' }));
 // 5) put bodyparser code before the routes (converts request to req.body)
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
